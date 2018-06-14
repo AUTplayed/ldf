@@ -1,10 +1,10 @@
-# LDF - A simple frontend library for making Single-Page Applications
+# LDF - Little Dynamic Framework for making Single-Page Applications
 
-Tired of giant Frameworks like Angular? 
+Tired of giant frameworks like Angular? 
 
 Want to make a small website feel 100x better because it's a Single-Page Application?
 
-Then this is the library for you!
+Then this is the framework for you!
 
 ## Features
 
@@ -46,7 +46,7 @@ You also have to add a div element with the id "ldf" in your `index.html` where 
 <div id="ldf"></div>
 ```
 
-The library currently expects a folder structure like this:
+LDF currently expects a folder structure like this:
 
 ```
 index.html                                    required
@@ -60,13 +60,24 @@ pages/                                        required
     └── styles.css
 ```
 
-Each folder in the `pages` directory represents a page (duh) and will be loaded if a user navigates to the route named after the folder. So, for example if a user clicks on an `a` tag with `href="examplepage"`, the library will attempt to load `pages/examplepage/examplepage.html`.
+Each folder in the `pages` directory represents a page (duh) and will be loaded if a user navigates to the route named after the folder. So, for example if a user clicks on an `a` tag with `href="examplepage"`, LDF will attempt to load `pages/examplepage/examplepage.html`.
 
 ## Drawbacks
 
 In order for the refresh function to work, you will have to include a special case in your web server.
 
-You have to look at the request if it's not `/` but a request to a page, and send back your `index.html`. But you can't just always send back `index.html` when the requested file isn't found, unless you want your site to break if a user visits a missing page, since `ldf` relies on getting an error from a request to a missing page.
+You have to look at the request if it's not `/` but a request to a page, and send back your `index.html`. But you can't just always send back `index.html` when the requested file isn't found, unless you want your site to break if a user visits a missing page, since LDF relies on getting an error from a request to a missing page.
+
+A small implementation of this I used in the test/example project (with nodejs and express) looks like this:
+
+```javascript
+// Static resources
+app.use(express.static(pj(__dirname)));
+// Special case, always sends back index.html if the request is only 1 level. This works because requests to resources are 3 levels deep (pages/resource/resource.html)
+app.get("/:page", (req, res) => {
+	res.sendFile(pj(__dirname, "index.html"));
+});
+```
 
 ## Final Notes
 

@@ -1,7 +1,7 @@
 {
   "name": "ldf",
   "version": "1.0.0",
-  "description": "LDF - A simple frontend library for making Single Page Applications",
+  "description": "LDF - Little Dynamic Framework for making Single Page Applications",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
