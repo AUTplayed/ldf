@@ -1,0 +1,18 @@
+{
+  "name": "ldf",
+  "version": "1.0.0",
+  "description": "LDF - A simple frontend library for making Single Page Applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/AUTplayed/ldf"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
