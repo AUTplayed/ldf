@@ -40,7 +40,7 @@ Just include the script in your index page like this:
 <script src="ldf.js"></script>
 ```
 
-You also have to add a div element with the id "ldf" where you want your content to be like this:
+You also have to add a div element with the id "ldf" in your `index.html` where you want your content to be like this:
 
 ```
 <div id="ldf"></div>
@@ -49,6 +49,7 @@ You also have to add a div element with the id "ldf" where you want your content
 The library currently expects a folder structure like this:
 
 ```
+index.html                                    required
 pages/                                        required
 ├── index/                                    required
 │   ├── index.html                            required
@@ -58,6 +59,8 @@ pages/                                        required
     ├── examplepage.html
     └── styles.css
 ```
+
+Each folder in the `pages` directory represents a page (duh) and will be loaded if a user navigates to the route named after the folder. So, for example if a user clicks on an `a` tag with `href="examplepage"`, the library will attempt to load `pages/examplepage/examplepage.html`.
 
 ## Drawbacks
 
