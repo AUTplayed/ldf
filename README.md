@@ -74,12 +74,13 @@ The page `index` is required, and is the default content you'll see without any 
 LDF currently allows for some configuration.
 
 ```javascript
-// The content displayed when LDF recieves a 404 from the server while requesting a page
-// Set this to undefined if you want LDF to display the error page it recieved from your server
+// The content displayed when LDF receive a 404 from the server while requesting a page
+// Set this to undefined if you want LDF to display the error page it receive from your server
 ldf.notfound = "<div>Page not Found</div>";
 // The directory your pages are stored on the server, default is /pages
 ldf.pagedir = "/pages";
-// The css selector string LDF will wait on before displaying the page. By default it waits for all stylesheets and all elements with a src attribute (like images), but not scripts.
+// The css selector string LDF will wait on before displaying the page.
+// By default it waits for all stylesheets and all elements with a src attribute (like images), but not scripts.
 ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]"
 ```
 
