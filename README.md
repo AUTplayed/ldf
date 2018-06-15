@@ -18,6 +18,10 @@ Navigating your website with `a` tags like this
 
 will, instead of fully refreshing the page, dynamically load the requested content (in this case`login.html`), and switch out the old content with the new one.
 
+Additionally, LDF will wait for external resources (like stylesheets or images) to load before displaying the page. Demonstration with a throttled connection and cpu:
+
+![demo](https://i.imgur.com/G9FTMYu.gif)
+
 The script will also change the browser's navigation bar via the History-API, so that the page can be refreshed and browser-features like back and forward will work.
 
 If you want to navigate your page via Javascript, all you have to do is call the `nav` function of the global `ldf` object like this, with the parameter being the page you want to navigate to:
@@ -28,7 +32,7 @@ ldf.nav("login");
 
 You can include css and js in your html files just like normal, they will also be dynamically loaded.
 
-For a small demonstration, check out the `test`directory.
+For a small demonstration, check out the `test` directory.
 
 **Notes:**
 
@@ -64,6 +68,20 @@ pages/                                        required
 
 Each folder in the `pages` directory represents a page (duh) and will be loaded if a user navigates to the route named after the folder. So, for example if a user clicks on an `a` tag with `href="examplepage"`, LDF will attempt to load `pages/examplepage/examplepage.html`.
 The page `index` is required, and is the default content you'll see without any navigation.
+
+## Configuration
+
+LDF currently allows for some configuration.
+
+```javascript
+// The content displayed when LDF recieves a 404 from the server while requesting a page
+// Set this to undefined if you want LDF to display the error page it recieved from your server
+ldf.notfound = "<div>Page not Found</div>";
+// The directory your pages are stored on the server, default is /pages
+ldf.pagedir = "/pages";
+// The css selector string LDF will wait on before displaying the page. By default it waits for all stylesheets and all elements with a src attribute (like images), but not scripts.
+ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]"
+```
 
 ## Drawbacks
 
