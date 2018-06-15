@@ -2,6 +2,8 @@
 
 Tired of giant frameworks like Angular? 
 
+Trying to avoid complicated stuff like MVC, Typescript or JSX and just want to create a website in good old plain JS HTML CSS?
+
 Want to make a small website feel 100x better because it's a Single-Page Application?
 
 Then this is the framework for you!
@@ -61,6 +63,7 @@ pages/                                        required
 ```
 
 Each folder in the `pages` directory represents a page (duh) and will be loaded if a user navigates to the route named after the folder. So, for example if a user clicks on an `a` tag with `href="examplepage"`, LDF will attempt to load `pages/examplepage/examplepage.html`.
+The page `index` is required, and is the default content you'll see without any navigation.
 
 ## Drawbacks
 
