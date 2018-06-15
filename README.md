@@ -74,8 +74,8 @@ The page `index` is required, and is the default content you'll see without any 
 LDF currently allows for some configuration.
 
 ```javascript
-// The content displayed when LDF receive a 404 from the server while requesting a page
-// Set this to undefined if you want LDF to display the error page it receive from your server
+// The content displayed when LDF receives a 404 from the server while requesting a page
+// Set this to undefined if you want LDF to display the error page it received from your server
 ldf.notfound = "<div>Page not Found</div>";
 // The directory your pages are stored on the server, default is /pages
 ldf.pagedir = "/pages";
