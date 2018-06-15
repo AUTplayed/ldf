@@ -1,10 +1,8 @@
-const fs = require("fs");
 const express = require("express");
 const app = express();
-const pj = require("path").join;
 
-app.use(express.static(pj(__dirname)));
+app.use(express.static(__dirname));
 app.get("/:page", (req, res) => {
-	res.sendFile(pj(__dirname, "index.html"));
+	res.sendFile(require("path").join(__dirname, "index.html"));
 });
-app.listen(8080);
+app.listen(8080, console.log("Server running on localhost:8080"));

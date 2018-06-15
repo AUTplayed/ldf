@@ -2,7 +2,7 @@
   "name": "ldf",
   "version": "1.0.0",
   "description": "LDF - Little Dynamic Framework for making Single Page Applications",
-  "main": "index.js",
+  "main": "test.js",
   "scripts": {
     "test": "node test.js"
   },
