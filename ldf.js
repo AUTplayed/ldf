@@ -2,6 +2,8 @@ var ldf = {
 	notfound: "<div>Page not Found</div>",
 	waitselector: "link[rel='stylesheet'],:not(script)[src]",
 	pagedir: "/pages",
+	begin: undefined,
+	end: undefined,
 	nav: function (location) {
 		history.pushState(null, "", location);
 		ldf.locchange();
@@ -9,7 +11,7 @@ var ldf = {
 	locchange: function (event) {
 		var loc = document.location.pathname;
 		if (loc == "/") loc = "/index";
-		console.log(loc);
+		if (ldf.begin) ldf.begin();
 		ldf.load(loc);
 	},
 	load: function (loc) {
@@ -30,7 +32,9 @@ var ldf = {
 		ldfnode.parentElement.insertBefore(ldfclone, ldfnode);
 		ldf.helpers.waitForLoad(ldfclone.querySelectorAll(ldf.waitselector),
 			function () {
-				ldf.helpers.switch(ldfnode, ldfclone);
+				ldfnode.remove();
+				ldfclone.style.display = "";
+				if (ldf.end) ldf.end();
 			}
 		);
 		ldf.updatePageLinks();
@@ -67,10 +71,6 @@ var ldf = {
 			} else {
 				cb();
 			}
-		},
-		switch: function (og, clone) {
-			og.remove();
-			clone.style.display = "";
 		},
 		listener: function (e) {
 			e.preventDefault();

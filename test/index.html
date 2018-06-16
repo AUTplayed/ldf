@@ -1,11 +1,20 @@
-<head>
-	<script src="ldf.js"></script>
-</head>
-<h1>My Website</h1>
+<h1 id="header">My Website</h1>
 <div id="ldf" style="height:80%"></div>
-<footer>
+<div>
 	<a href="/">Index</a>
 	<a href="helloworld">HelloWorld</a>
 	<a href="controls">Controls</a>
 	<a href="login">Login</a>
+</div>
+<footer>
+	<script src="ldf.js"></script>
+	<script>
+		var header = document.querySelector("#header");
+		ldf.begin = function () {
+			header.innerHTML = "My Website (loading)";
+		};
+		ldf.end = function () {
+			header.innerHTML = "My Website";
+		};
+	</script>
 </footer>
