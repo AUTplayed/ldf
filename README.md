@@ -94,10 +94,11 @@ A small implementation of this I used in the test/example project (with nodejs a
 
 ```javascript
 // Static resources
-app.use(express.static(pj(__dirname)));
-// Special case, always sends back index.html if the request is only 1 level. This works because requests to resources are 3 levels deep (pages/resource/resource.html)
+app.use(express.static(__dirname));
+// Special case, always sends back index.html if the request is only 1 level.
+// This works because requests to resources are 3 levels deep (pages/resource/resource.html)
 app.get("/:page", (req, res) => {
-	res.sendFile(pj(__dirname, "index.html"));
+	res.sendFile(require("path").join(__dirname, "index.html"));
 });
 ```
 
