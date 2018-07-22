@@ -32,7 +32,7 @@ ldf.nav("login");
 
 You can include css and js in your html files just like normal, they will also be dynamically loaded.
 
-For a small demonstration, check out the `test` directory.
+For a small demonstration, check out the `docs` directory [or check it out live](https://autplayed.github.io/ldf/).
 
 **Notes:**
 
@@ -81,16 +81,21 @@ ldf.notfound = "<div>Page not Found</div>";
 ldf.pagedir = "/pages";
 // The css selector string LDF will wait on before displaying the page.
 // By default it waits for all stylesheets and all elements with a src attribute (like images), but not scripts.
-ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]"
+ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]";
+// Use hash urls, by default it's true. Hash urls look like this: domain.com/#login
+// The advantage of these is that you don't need a web server to handle refresh events, but the url doesn't look that good.
+ldf.hash = true;
 ```
 
-## Drawbacks
+## Non-hash url
+
+If you don't want to use hash urls (more info a few lines above), then here's the instruction for you:
 
 In order for the refresh function to work, you will have to include a special case in your web server.
 
 You have to look at the request if it's not `/` but a request to a page, and send back your `index.html`. But you can't just always send back `index.html` when the requested file isn't found, unless you want your site to break if a user visits a missing page, since LDF relies on getting an error from a request to a missing page.
 
-A small implementation of this I used in the test/example project (with nodejs and express) looks like this:
+A small implementation of this I used in the docs/example project (with nodejs and express) looks like this:
 
 ```javascript
 // Static resources

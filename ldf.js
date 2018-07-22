@@ -4,13 +4,22 @@ var ldf = {
 	pagedir: "/pages",
 	begin: undefined,
 	end: undefined,
+	hash: true,
 	nav: function (location) {
+		if (ldf.hash && !location.startsWith("#")) {
+			location = "#" + location;
+			if (location == "#/") {
+				location = "#";
+			}
+		}
+		if (!ldf.hash && location == "") location = "/";
 		history.pushState(null, "", location);
 		ldf.locchange();
 	},
-	locchange: function (event) {
-		var loc = document.location.pathname;
-		if (loc == "/") loc = "/index";
+	locchange: function () {
+		var loc = ldf.hash ? document.location.hash : document.location.pathname;
+		loc = loc.replace("#", "/");
+		if (loc == "/" || loc == "") loc = "/index";
 		if (ldf.begin) ldf.begin();
 		ldf.load(loc);
 	},
