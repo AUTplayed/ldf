@@ -32,7 +32,7 @@ ldf.nav("login");
 
 You can include css and js in your html files just like normal, they will also be dynamically loaded.
 
-For a small demonstration, check out the `docs` directory.
+For a small demonstration, check out the `demo` directory, [or check it out live.](https://autplayed.github.io/ldf/demo/)
 
 **Notes:**
 
@@ -79,6 +79,9 @@ LDF currently allows for some configuration.
 ldf.notfound = "<div>Page not Found</div>";
 // The directory your pages are stored on the server, default is /pages
 ldf.pagedir = "/pages";
+// A base url that is prepended for every navigation
+// Used in my case for github pages since that has a required base url
+ldf.baseurl = "";
 // The css selector string LDF will wait on before displaying the page.
 // By default it waits for all stylesheets and all elements with a src attribute (like images), but not scripts.
 ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]";
@@ -95,7 +98,7 @@ In order for the refresh function to work, you will have to include a special ca
 
 You have to look at the request if it's not `/` but a request to a page, and send back your `index.html`. But you can't just always send back `index.html` when the requested file isn't found, unless you want your site to break if a user visits a missing page, since LDF relies on getting an error from a request to a missing page.
 
-A small implementation of this I used in the docs/example project (with nodejs and express) looks like this:
+A small implementation of this I used in the demo/example project (with nodejs and express) looks like this:
 
 ```javascript
 // Static resources

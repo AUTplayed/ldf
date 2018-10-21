@@ -1,7 +1,7 @@
 var ldf = {
 	notfound: "<div>Page not Found</div>",
 	waitselector: "link[rel='stylesheet'],:not(script)[src]",
-	pagedir: "/pages",
+	pagedir: "pages",
 	baseurl: "",
 	begin: undefined,
 	end: undefined,
