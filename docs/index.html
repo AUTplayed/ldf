@@ -7,9 +7,10 @@
 	<a href="login">Login</a>
 </div>
 <footer>
-	<script src="/ldf.js"></script>
+	<script src="ldf.js"></script>
 	<script>
 		var header = document.querySelector("#header");
+		ldf.baseurl = "ldf"; // needed for github pages
 		ldf.begin = function () {
 			header.innerHTML = "My Website (loading)";
 		};

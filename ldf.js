@@ -2,6 +2,7 @@ var ldf = {
 	notfound: "<div>Page not Found</div>",
 	waitselector: "link[rel='stylesheet'],:not(script)[src]",
 	pagedir: "/pages",
+	baseurl: "",
 	begin: undefined,
 	end: undefined,
 	hash: true,
@@ -13,12 +14,16 @@ var ldf = {
 			}
 		}
 		if (!ldf.hash && location == "") location = "/";
-		history.pushState(null, "", location);
+		history.pushState(null, "", ldf.baseurl + location);
 		ldf.locchange();
 	},
 	locchange: function () {
 		var loc = ldf.hash ? document.location.hash : document.location.pathname;
+		loc = loc.replace(ldf.baseurl, "");
 		loc = loc.replace("#", "/");
+		if (!loc.startsWith("/")) {
+			loc = "/" + loc;
+		}
 		if (loc == "/" || loc == "") loc = "/index";
 		if (ldf.begin) ldf.begin();
 		ldf.load(loc);
@@ -97,5 +102,12 @@ var ldf = {
 		}
 	}
 };
+if(!ldf.baseurl.endsWith("/")) {
+	ldf.baseurl += "/";
+}
+if(!ldf.baseurl.startsWith("/")) {
+	ldf.baseurl = "/" + ldf.baseurl;
+}
+
 onpopstate = ldf.locchange;
 onload = ldf.locchange;
