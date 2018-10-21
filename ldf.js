@@ -41,14 +41,18 @@ var ldf = {
 	change: function (content) {
 		var ldfnode = document.querySelector("#ldf");
 		var ldfclone = ldfnode.cloneNode();
+		var ended = false;
 		ldfclone.innerHTML = content;
 		ldfclone.style.display = "none";
 		ldfnode.parentElement.insertBefore(ldfclone, ldfnode);
 		ldf.helpers.waitForLoad(ldfclone.querySelectorAll(ldf.waitselector),
 			function () {
-				ldfnode.remove();
-				ldfclone.style.display = "";
-				if (ldf.end) ldf.end();
+				if (!ended) {
+					ended = true;
+					ldfnode.remove();
+					ldfclone.style.display = "";
+					if (ldf.end) ldf.end();
+				}
 			}
 		);
 		ldf.updatePageLinks();
@@ -74,17 +78,20 @@ var ldf = {
 		waitForLoad: function (loadings, cb) {
 			if (loadings.length > 0) {
 				var loadedcounter = 0;
-				loadings.forEach(function (loading) {
-					loading.onload = function () {
-						loadedcounter++;
-						if (loadedcounter == loadings.length) {
-							cb();
-						}
+				var onloadOrError = function() {
+					loadedcounter++;
+					if (loadedcounter == loadings.length) {
+						cb();
 					}
+				}
+				loadings.forEach(function (loading) {
+					loading.onload = onloadOrError;
+					loading.onerror = onloadOrError;
 				});
 			} else {
 				cb();
 			}
+			
 		},
 		listener: function (e) {
 			e.preventDefault();
@@ -102,12 +109,6 @@ var ldf = {
 		}
 	}
 };
-if(!ldf.baseurl.endsWith("/")) {
-	ldf.baseurl += "/";
-}
-if(!ldf.baseurl.startsWith("/")) {
-	ldf.baseurl = "/" + ldf.baseurl;
-}
 
 onpopstate = ldf.locchange;
 onload = ldf.locchange;
