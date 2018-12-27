@@ -24,12 +24,14 @@ var ldf = {
 		if (!loc.startsWith("/")) {
 			loc = "/" + loc;
 		}
+		loc = loc.split("\?")[0];
 		if (loc == "/" || loc == "") loc = "/index";
 		if (ldf.begin) ldf.begin();
 		ldf.load(loc);
 	},
 	load: function (loc) {
 		loc = ldf.pagedir + loc + loc + ".html";
+		loc += ldf.hash ? "?" + document.location.hash.split("\?")[1] : document.location.search;
 		ldf.helpers.request(loc, function (succ, content) {
 			if (succ && ldf.notfound !== undefined) {
 				ldf.change(content);
@@ -78,7 +80,7 @@ var ldf = {
 		waitForLoad: function (loadings, cb) {
 			if (loadings.length > 0) {
 				var loadedcounter = 0;
-				var onloadOrError = function() {
+				var onloadOrError = function () {
 					loadedcounter++;
 					if (loadedcounter == loadings.length) {
 						cb();
@@ -91,7 +93,6 @@ var ldf = {
 			} else {
 				cb();
 			}
-			
 		},
 		listener: function (e) {
 			e.preventDefault();
