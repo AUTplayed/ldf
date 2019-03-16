@@ -8,6 +8,15 @@ Want to make a small website feel 100x better because it's a Single-Page Applica
 
 Then this is the framework for you!
 
+## Table of Contents
+
+- [Features](#features)
+- [Getting started](#getting-started)
+- [Configuration](#configuration)
+- [Non-Hash url](#non-hash-url)
+- [Quickstart with java server](#quickstart-with-java-server)
+- [Final Notes](#final-notes)
+
 ## Features
 
 Navigating your website with `a` tags like this
