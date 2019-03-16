@@ -110,6 +110,10 @@ app.get("/:page", (req, res) => {
 });
 ```
 
+## Quickstart with java server
+
+I wrote a java library to quickstart development with ldf and the templating engine mustache. It also solves the problems with non-hash url as mentioned above. [You can find information about the library here](https://github.com/AUTplayed/ldfSpark)
+
 ## Final Notes
 
 This project was just thrown together in a few hours based on a way messier implementation, which I used in my diploma thesis. If you find a bug or want to add an improvement, please open an issue/pull request.
