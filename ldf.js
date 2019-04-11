@@ -1,4 +1,5 @@
 var ldf = {
+	mainselector: "#ldf",
 	notfound: "<div>Page not Found</div>",
 	waitselector: "link[rel='stylesheet'],:not(script)[src]",
 	pagedir: "pages",
@@ -21,27 +22,32 @@ var ldf = {
 		var loc = ldf.hash ? document.location.hash : document.location.pathname;
 		loc = loc.replace(ldf.baseurl, "");
 		loc = loc.replace("#", "/");
-		if (!loc.startsWith("/")) {
-			loc = "/" + loc;
-		}
 		loc = loc.split("\?")[0];
 		if (loc == "/" || loc == "") loc = "/index";
 		if (ldf.begin) ldf.begin();
-		ldf.load(loc);
+		ldf.load(ldf.mainselector, loc);
 	},
-	load: function (loc) {
+	load: function (selector, loc) {
+		if (!loc.startsWith("/")) {
+			loc = "/" + loc;
+		}
 		loc = ldf.pagedir + loc + loc + ".html";
-		loc += ldf.hash ? "?" + document.location.hash.split("\?")[1] : document.location.search;
+		if (ldf.hash) {
+			var query = document.location.hash.split("\?")[1] || "";
+			loc += query ? "?" + query : "";
+		} else {
+			loc += document.location.search || "";
+		}
 		ldf.helpers.request(loc, function (succ, content) {
 			if (succ && ldf.notfound !== undefined) {
-				ldf.change(content);
+				ldf.change(selector, content);
 			} else {
-				ldf.change(ldf.notfound);
+				ldf.change(selector, ldf.notfound);
 			}
 		});
 	},
-	change: function (content) {
-		var ldfnode = document.querySelector("#ldf");
+	change: function (selector, content) {
+		var ldfnode = document.querySelector(selector);
 		var ldfclone = ldfnode.cloneNode();
 		var ended = false;
 		ldfclone.innerHTML = content;

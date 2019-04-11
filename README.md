@@ -55,13 +55,13 @@ Just include the script in your index page like this:
 <script src="ldf.js"></script>
 ```
 
-You also have to add a div element with the id "ldf" in your `index.html` where you want your content to be like this:
+You also have to add a div element with the id "ldf"(configurable) in your `index.html` where you want your content to be like this:
 
 ```
 <div id="ldf"></div>
 ```
 
-LDF currently expects a folder structure like this:
+LDF expects a folder structure like this (directory name can be configured):
 
 ```
 index.html                                    required
@@ -83,6 +83,8 @@ The page `index` is required, and is the default content you'll see without any 
 LDF currently allows for some configuration.
 
 ```javascript
+// The selector for which content should be switched out on page change
+ldf.mainselector = "#ldf";
 // The content displayed when LDF receives a 404 from the server while requesting a page
 // Set this to undefined if you want LDF to display the error page it received from your server
 ldf.notfound = "<div>Page not Found</div>";
@@ -97,6 +99,23 @@ ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]";
 // Use hash urls, by default it's true. Hash urls look like this: domain.com/#login
 // The advantage of these is that you don't need a web server to handle refresh events, but the url doesn't look that good.
 ldf.hash = true;
+```
+
+## Other uses
+
+You can also use the functions provided by ldf to load pages into other elements like demonstrated here: ![demo](https://i.imgur.com/xessGiQ.gif)
+
+Methods you can use:
+
+```javascript
+ldf.load(selector, location);
+ldf.load("#header", "/header");
+```
+
+```javascript
+// external content will be waited on before the content is changed just like switching pages
+ldf.change(selector, htmlContent);
+ldf.change("#footer", "<div>new footer</div><script src='...'/>");
 ```
 
 ## Non-hash url
