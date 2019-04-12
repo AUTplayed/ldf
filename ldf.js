@@ -42,7 +42,7 @@ var ldf = {
 			loc += document.location.search || "";
 		}
 		ldf.helpers.request(loc, function (succ, content) {
-			if (succ && ldf.notfound !== undefined) {
+			if (succ || ldf.notfound == undefined) {
 				ldf.change(selector, content);
 			} else {
 				ldf.change(selector, ldf.notfound);
