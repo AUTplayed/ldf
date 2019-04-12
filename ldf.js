@@ -8,6 +8,9 @@ var ldf = {
 	end: undefined,
 	hash: true,
 	nav: function (location) {
+		if (location.startsWith("javascript:")) {
+			return;
+		}
 		if (ldf.hash && !location.startsWith("#")) {
 			location = "#" + location;
 			if (location == "#/") {
