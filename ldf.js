@@ -71,7 +71,7 @@ var ldf = {
 	},
 	updatePageLinks: function () {
 		document.querySelectorAll("a").forEach(function (a) {
-			if (a.href && a.href.includes(location.href.split("#")[0])) {
+			if (a.href && (a.href.includes(location.href.split("#")[0]) || a.href == "/")) {
 				a.removeEventListener("click", ldf.helpers.listener);
 				a.addEventListener("click", ldf.helpers.listener);
 			}
