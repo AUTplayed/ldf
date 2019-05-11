@@ -68,8 +68,10 @@ var ldf = {
 	},
 	updatePageLinks: function () {
 		document.querySelectorAll("a").forEach(function (a) {
-			a.removeEventListener("click", ldf.helpers.listener);
-			a.addEventListener("click", ldf.helpers.listener);
+			if (a.href && a.href.includes(location.href)) {
+				a.removeEventListener("click", ldf.helpers.listener);
+				a.addEventListener("click", ldf.helpers.listener);
+			}
 		});
 	},
 	loadScripts: function (node) {
