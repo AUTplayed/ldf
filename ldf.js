@@ -74,7 +74,7 @@ var ldf = {
 			var className = a.className;
 			var href = a.href;
 			if (className.includes("ldfignore")) return;
-			if (className.includes("ldfinclude") || (href && (href.includes(location.href.split("#")[0]) || href == "/") && !href.split("/").pop().match(/\.(?!html)/))) {
+			if (className.includes("ldfinclude") || (href && (href.includes(location.href.split("#")[0]) || a.getAttribute("href") == "/") && !href.split("/").pop().match(/\.(?!html)/))) {
 				a.removeEventListener("click", ldf.helpers.listener);
 				a.addEventListener("click", ldf.helpers.listener);
 			}
