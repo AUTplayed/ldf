@@ -11,23 +11,17 @@ var ldf = {
 		if (location.startsWith("javascript:")) {
 			return;
 		}
-		if (ldf.hash && !location.startsWith("#")) {
+		if (ldf.hash && !location.startsWith("#") && location != "/") {
 			location = "#" + location;
-			if (location == "#/") {
-				location = "#";
-			}
 		}
-		if (!ldf.hash && location == "") location = "/";
 		history.pushState(null, "", ldf.baseurl + location);
 		ldf.locchange();
 	},
 	locchange: function () {
-		var loc = ldf.hash ? document.location.hash : document.location.pathname;
-		loc = loc.replace(ldf.baseurl, "");
-		loc = loc.replace("#", "/");
-		loc = loc.split("\?")[0];
-		if (loc == "/" || loc == "") loc = "/index";
 		if (ldf.begin) ldf.begin();
+		var loc = ldf.hash ? document.location.hash : document.location.pathname;
+		loc = loc.match(/(?<=#|\/)[^?|\/]*/).pop();
+		if (loc == "") loc = "index";
 		ldf.load(ldf.mainselector, loc);
 	},
 	load: function (selector, loc) {
