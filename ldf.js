@@ -8,9 +8,6 @@ var ldf = {
 	end: undefined,
 	hash: true,
 	nav: function (location) {
-		if (location.startsWith("javascript:")) {
-			return;
-		}
 		if (ldf.hash && !location.startsWith("#") && location != "/") {
 			location = "#" + location;
 		}
@@ -20,7 +17,8 @@ var ldf = {
 	locchange: function () {
 		if (ldf.begin) ldf.begin();
 		var loc = ldf.hash ? document.location.hash : document.location.pathname;
-		loc = loc.match(/(?<=#|\/)[^?|\/]*/).pop();
+		var matches = loc.match(/(?<=#|\/)[^?|\/]*/);
+		if (matches != null && matches.length > 0) loc = matches.pop();
 		if (loc == "") loc = "index";
 		ldf.load(ldf.mainselector, loc);
 	},
@@ -68,6 +66,7 @@ var ldf = {
 			var className = a.className;
 			var href = a.href;
 			if (className.includes("ldfignore")) return;
+			if (href.startsWith("javascript:")) return;
 			if (className.includes("ldfinclude") || (href && (href.includes(location.href.split("#")[0]) || a.getAttribute("href") == "/") && !href.split("/").pop().match(/\.(?!html)/))) {
 				a.removeEventListener("click", ldf.helpers.listener);
 				a.addEventListener("click", ldf.helpers.listener);
