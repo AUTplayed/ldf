@@ -11,6 +11,7 @@ var ldf = {
 		if (ldf.hash && !location.startsWith("#") && location != "/") {
 			location = "#" + location;
 		}
+		if (ldf.baseurl != "" && location == "/") location = "";
 		history.pushState(null, "", ldf.baseurl + location);
 		ldf.locchange();
 	},
