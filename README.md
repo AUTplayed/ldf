@@ -13,6 +13,7 @@ Then this is the framework for you!
 - [Features](#features)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
+- [Component Swapping](#component-swapping)
 - [Non-Hash url](#non-hash-url)
 - [Quickstart with java server](#quickstart-with-java-server)
 - [Final Notes](#final-notes)
@@ -101,7 +102,7 @@ ldf.waitselector = "link[rel='stylesheet'],:not(script)[src]";
 ldf.hash = true;
 ```
 
-## Other uses
+## Component swapping
 
 You can also use the functions provided by ldf to load pages into other elements like demonstrated here: ![demo](https://i.imgur.com/xessGiQ.gif)
 
@@ -117,6 +118,8 @@ ldf.load("#header", "/header");
 ldf.change(selector, htmlContent);
 ldf.change("#footer", "<div>new footer</div><script src='...'/>");
 ```
+
+If you want to have an example that shows the potential uses for this, you can find one [here](https://github.com/AUTplayed/ldfSampleLogin)
 
 ## Non-hash url
 
