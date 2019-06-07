@@ -17,23 +17,26 @@ var ldf = {
 	},
 	locchange: function () {
 		if (ldf.begin) ldf.begin();
-		var loc = ldf.hash ? document.location.hash : document.location.pathname;
+		var query, loc;
+		if (ldf.hash) {
+			query = document.location.hash.split("\?")[1] || "";
+			query = query ? "?" + query : "";
+			loc = document.location.hash;
+		} else {
+			query = document.location.search || "";
+			loc = document.location.pathname;
+		}
 		var matches = loc.match(/(?<=#|\/)[^?|\/]*/);
 		if (matches != null && matches.length > 0) loc = matches.pop();
 		if (loc == "") loc = "index";
-		ldf.load(ldf.mainselector, loc);
+		ldf.load(ldf.mainselector, loc, query);
 	},
-	load: function (selector, loc) {
+	load: function (selector, loc, query) {
 		if (!loc.startsWith("/")) {
 			loc = "/" + loc;
 		}
 		loc = ldf.pagedir + loc + loc + ".html";
-		if (ldf.hash) {
-			var query = document.location.hash.split("\?")[1] || "";
-			loc += query ? "?" + query : "";
-		} else {
-			loc += document.location.search || "";
-		}
+		loc += query;
 		ldf.helpers.request(loc, function (succ, content) {
 			if (succ || ldf.notfound == undefined) {
 				ldf.change(selector, content);

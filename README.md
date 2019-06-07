@@ -108,8 +108,8 @@ You can also use the functions provided by ldf to load pages into other elements
 Methods you can use:
 
 ```javascript
-ldf.load(selector, location);
-ldf.load("#header", "/header");
+ldf.load(selector, location, \<optional\>query);
+ldf.load("#header", "/header", "?fancy=true");
 ```
 
 ```javascript
