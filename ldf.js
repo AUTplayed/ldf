@@ -107,7 +107,18 @@ var ldf = {
 		},
 		listener: function (e) {
 			e.preventDefault();
-			ldf.nav(e.target.getAttribute("href"));
+			var loc = "";
+			if (e.target.tagName === "A") {
+				loc = e.target.getAttribute("href");
+			} else {
+				for (var i = 1; i < e.path.length; i++) {
+					if (e.path[i].tagName === "A") {
+						loc = e.path[i].getAttribute("href");
+						break;
+					}
+				}
+			}
+			ldf.nav(loc);
 		},
 		request: function (loc, cb) {
 			var req = new XMLHttpRequest();
