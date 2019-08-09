@@ -42,7 +42,7 @@ ldf.nav("login");
 
 You can include css and js in your html files just like normal, they will also be dynamically loaded.
 
-For a small demonstration, check out the `demo` directory, [or check it out live.](https://autplayed.github.io/ldf/demo/)
+For a small demonstration, check out the `demo` directory, [or check it out live.](https://ldf.js.org/demo/)
 
 **Notes:**
 
