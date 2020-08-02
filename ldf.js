@@ -1,7 +1,7 @@
 var ldf = {
 	mainselector: "#ldf",
 	notfound: "<div>Page not Found</div>",
-	waitselector: "link[rel='stylesheet'],:not(script)[src]",
+	waitselector: "link[rel='stylesheet'],:not(script)[src]:not(iframe)",
 	pagedir: "pages",
 	baseurl: "",
 	begin: undefined,
